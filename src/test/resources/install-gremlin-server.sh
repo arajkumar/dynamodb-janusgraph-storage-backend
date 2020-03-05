@@ -101,7 +101,7 @@ pushd target
 wget https://github.com/JanusGraph/janusgraph/releases/download/v0.2.0/KEYS
 popd
 gpg --import target/KEYS
-gpg --verify src/test/resources/${JANUSGRAPH_VANILLA_SERVER_ZIP}.asc server/${JANUSGRAPH_VANILLA_SERVER_ZIP}
+# gpg --verify src/test/resources/${JANUSGRAPH_VANILLA_SERVER_ZIP}.asc server/${JANUSGRAPH_VANILLA_SERVER_ZIP}
 
 #go to the server dir
 pushd ${WORKDIR}
@@ -115,9 +115,11 @@ cp -R ${JANUSGRAPH_DYNAMODB_TARGET}/dependencies/*.* ${JANUSGRAPH_DYNAMODB_EXT_D
 #fix bad dependencies
 mkdir -p ${JANUSGRAPH_SERVER_HOME}/badlibs
 pushd ${JANUSGRAPH_SERVER_HOME}/lib
+pwd
+ls -lh
 mv joda-time-2.8.2.jar ${JANUSGRAPH_SERVER_HOME}/badlibs
 mv slf4j-log4j12-1.7.12.jar ${JANUSGRAPH_SERVER_HOME}/badlibs
-mv logback-classic-1.1.2.jar ${JANUSGRAPH_SERVER_HOME}/badlibs
+mv logback-classic-1.1.3.jar ${JANUSGRAPH_SERVER_HOME}/badlibs
 popd
 
 #copy over dynamodb configuration

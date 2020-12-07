@@ -19,6 +19,7 @@ import org.janusgraph.diskstorage.BackendException;
 import org.janusgraph.graphdb.JanusGraphSpeedTest;
 import org.janusgraph.graphdb.SpeedTestSchema;
 import org.janusgraph.graphdb.configuration.GraphDatabaseConfiguration;
+import org.janusgraph.graphdb.configuration.builder.GraphDatabaseConfigurationBuilder;
 import org.janusgraph.graphdb.database.StandardJanusGraph;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -59,7 +60,7 @@ public abstract class AbstractDynamoDBGraphSpeedTest extends JanusGraphSpeedTest
     @Override
     protected StandardJanusGraph getGraph() throws BackendException {
         if (null == graph) {
-            final GraphDatabaseConfiguration graphconfig = new GraphDatabaseConfiguration(conf);
+            final GraphDatabaseConfiguration graphconfig = new GraphDatabaseConfigurationBuilder().build(conf);
             graphconfig.getBackend().clearStorage();
             graph = (StandardJanusGraph) JanusGraphFactory.open(conf);
             initializeGraph(graph);
